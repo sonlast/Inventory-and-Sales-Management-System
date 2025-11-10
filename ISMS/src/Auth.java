@@ -105,7 +105,7 @@ public class Auth extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(142, 180, 134));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ijerson\\Downloads\\2.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/2.png"))); // NOI18N
         jLabel1.setText("jLabel1");
 
         label1.setAlignment(java.awt.Label.CENTER);
