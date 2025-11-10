@@ -14,6 +14,73 @@ public class Auth extends javax.swing.JFrame {
      */
     public Auth() {
         initComponents();
+
+        // Apply custom rounded borders to buttons
+        styleButton(jButton1);
+        styleButton(jButton2);
+    }
+
+    private void styleButton(javax.swing.JButton button) {
+        button.setFocusPainted(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setOpaque(false);
+
+        // Store original color
+        final java.awt.Color originalBg = button.getBackground();
+
+        // Add hover effect
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                button.setBackground(new java.awt.Color(245, 245, 245));
+                button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                button.repaint();
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                button.setBackground(originalBg);
+                button.repaint();
+            }
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                button.setBackground(new java.awt.Color(220, 220, 220));
+                button.repaint();
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e) {
+                if (button.contains(e.getPoint())) {
+                    button.setBackground(new java.awt.Color(245, 245, 245));
+                } else {
+                    button.setBackground(originalBg);
+                }
+                button.repaint();
+            }
+        });
+
+        button.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+            @Override
+            public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
+                        java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+                // Draw rounded background
+                g2.setColor(button.getBackground());
+                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);
+
+                // Draw rounded border
+                g2.setColor(new java.awt.Color(142, 180, 134));
+                g2.setStroke(new java.awt.BasicStroke(2));
+                g2.drawRoundRect(1, 1, c.getWidth() - 2, c.getHeight() - 2, 50, 50);
+
+                g2.dispose();
+                super.paint(g, c);
+            }
+        });
     }
 
     /**
