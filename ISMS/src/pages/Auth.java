@@ -15,6 +15,8 @@ public class Auth extends javax.swing.JFrame {
      */
     public Auth() {
         initComponents();
+        
+        
 
         // Apply custom rounded borders to buttons
         styleButton(jButton1);
