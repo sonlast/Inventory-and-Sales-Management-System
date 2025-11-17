@@ -21,7 +21,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new Dashboard().setVisible(true);
         });

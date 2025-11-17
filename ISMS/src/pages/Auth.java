@@ -1,287 +1,377 @@
 package pages;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-/**
- *
- * @author Ijerson
- */
+import javax.swing.*;
+import java.awt.*;
+import java.util.Objects;
+
 public class Auth extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Auth
-     */
     public Auth() {
+        setTitle("SIGN UP");
+        setSize(900, 600);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/2.png"))).getImage());
+
         initComponents();
-        
-        
+    }
 
-        // Apply custom rounded borders to buttons
-        styleButton(jButton1);
-        styleButton(jButton2);
+    private void center(JComponent... components) {
+        for (JComponent c : components) {
+            c.setAlignmentX(Component.CENTER_ALIGNMENT);
+        }
+    }
 
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.setText("<html><a href=''; style='color:#AD3C3C'>here.</a></html>");
+    private void initComponents() {
+        Font headerFont = new Font("Trebuchet MS", Font.PLAIN, 24);
+        Font subHeaderFont = new Font("Trebuchet MS", Font.PLAIN, 14);
+        Font options = new Font("Trebuchet MS", Font.BOLD, 24);
 
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        JPanel mainPanel = new JPanel();
+        JPanel headerPanel = new JPanel();
+        JPanel contingencyPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 4, 0));
+        mainPanel.setBackground(new Color(142, 180, 134));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        headerPanel.setOpaque(false);
+        headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
+        contingencyPanel.setOpaque(false);
+
+        JLabel mainLogo = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/2.png"))));
+
+        JLabel headerText = new JLabel("SIGN UP");
+        headerText.setFont(headerFont);
+        headerText.setForeground(Color.decode("#FFFFFF"));
+        JLabel subHeaderText = new JLabel("as");
+        subHeaderText.setFont(subHeaderFont);
+        subHeaderText.setForeground(Color.decode("#FFFFFF"));
+        headerPanel.add(headerText);
+        headerPanel.add(subHeaderText);
+
+        JButton adminBtn = new JButton("ADMIN");
+        adminBtn.setFont(options);
+        JButton staffBtn = new JButton("STAFF");
+        staffBtn.setFont(options);
+
+        JLabel contingencyText = new JLabel("Have an account? Log in");
+        JLabel linkText = new JLabel("<html>here.</html>");
+        linkText.setForeground(Color.decode("#AD3C3C"));
+        linkText.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        linkText.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                new Auth2().setVisible(true);  
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                new Auth2().setVisible(true);
                 dispose();
             }
         });
+
+        contingencyPanel.add(contingencyText);
+        contingencyPanel.add(linkText);
+
+        center(mainLogo, headerPanel, headerText, subHeaderText, adminBtn, staffBtn, contingencyPanel, contingencyText, linkText);
+
+        mainPanel.add(Box.createVerticalStrut(40));
+        mainPanel.add(mainLogo);
+        mainPanel.add(Box.createVerticalStrut(30));
+        mainPanel.add(headerPanel);
+        mainPanel.add(Box.createVerticalStrut(30));
+        mainPanel.add(adminBtn);
+        mainPanel.add(Box.createVerticalStrut(30));
+        mainPanel.add(staffBtn);
+        mainPanel.add(Box.createVerticalStrut(50));
+        mainPanel.add(contingencyPanel);
+
+        add(mainPanel);
     }
 
-    private void styleButton(javax.swing.JButton button) {
-        button.setFocusPainted(false);
-        button.setContentAreaFilled(false);
-        button.setBorderPainted(false);
-        button.setOpaque(false);
-
-        // Store original color
-        final java.awt.Color originalBg = button.getBackground();
-
-        // Add hover effect
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent e) {
-                button.setBackground(new java.awt.Color(245, 245, 245));
-                button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                button.repaint();
-            }
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent e) {
-                button.setBackground(originalBg);
-                button.repaint();
-            }
-
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent e) {
-                button.setBackground(new java.awt.Color(220, 220, 220));
-                button.repaint();
-            }
-
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent e) {
-                if (button.contains(e.getPoint())) {
-                    button.setBackground(new java.awt.Color(245, 245, 245));
-                } else {
-                    button.setBackground(originalBg);
-                }
-                button.repaint();
-            }
-        });
-
-        button.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
-            @Override
-            public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
-                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
-                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
-                        java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
-
-                // Draw rounded background
-                g2.setColor(button.getBackground());
-                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);
-
-                // Draw rounded border
-                g2.setColor(new java.awt.Color(142, 180, 134));
-                g2.setStroke(new java.awt.BasicStroke(2));
-                g2.drawRoundRect(1, 1, c.getWidth() - 2, c.getHeight() - 2, 50, 50);
-
-                g2.dispose();
-                super.paint(g, c);
-            }
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new Auth().setVisible(true);
         });
     }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        label1 = new java.awt.Label();
-        label2 = new java.awt.Label();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(142, 180, 134));
-
-        jPanel1.setBackground(new java.awt.Color(142, 180, 134));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/2.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-
-        label1.setAlignment(java.awt.Label.CENTER);
-        label1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        label1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
-        label1.setForeground(new java.awt.Color(255, 255, 255));
-        label1.setName(""); // NOI18N
-        label1.setText("SIGN UP ");
-
-        label2.setAlignment(java.awt.Label.CENTER);
-        label2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        label2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        label2.setForeground(new java.awt.Color(255, 255, 255));
-        label2.setName(""); // NOI18N
-        label2.setText("as");
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(142, 180, 134));
-        jButton1.setText("ADMIN");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(142, 180, 134));
-        jButton2.setText("STAFF");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Have an account? Log In");
-
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("here.");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(365, 365, 365)
-                        .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(326, 326, 326)
-                        .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(304, 304, 304)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(304, 304, 304)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(295, 295, 295)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(228, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(57, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        new Admin().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        new Staff().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Auth.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Auth.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Auth.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Auth.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Auth().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
-    private java.awt.Label label2;
-    // End of variables declaration//GEN-END:variables
 }
+
+//package pages;
+//
+///*
+// * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+// * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+// */
+///**
+// *
+// * @author Ijerson
+// */
+//public class Auth extends javax.swing.JFrame {
+//
+//    /**
+//     * Creates new form Auth
+//     */
+//    public Auth() {
+//        initComponents();
+//
+//        // Apply custom rounded borders to buttons
+//        styleButton(jButton1);
+//        styleButton(jButton2);
+//
+//        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+//        jLabel3.setText("<html><a href=''; style='color:#AD3C3C'>here.</a></html>");
+//
+//        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+//            @Override
+//            public void mouseClicked(java.awt.event.MouseEvent e) {
+//                new Auth2().setVisible(true);
+//                dispose();
+//            }
+//        });
+//    }
+//
+//    private void styleButton(javax.swing.JButton button) {
+//        button.setFocusPainted(false);
+//        button.setContentAreaFilled(false);
+//        button.setBorderPainted(false);
+//        button.setOpaque(false);
+//
+//        // Store original color
+//        final java.awt.Color originalBg = button.getBackground();
+//
+//        // Add hover effect
+//        button.addMouseListener(new java.awt.event.MouseAdapter() {
+//            @Override
+//            public void mouseEntered(java.awt.event.MouseEvent e) {
+//                button.setBackground(new java.awt.Color(245, 245, 245));
+//                button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+//                button.repaint();
+//            }
+//
+//            @Override
+//            public void mouseExited(java.awt.event.MouseEvent e) {
+//                button.setBackground(originalBg);
+//                button.repaint();
+//            }
+//
+//            @Override
+//            public void mousePressed(java.awt.event.MouseEvent e) {
+//                button.setBackground(new java.awt.Color(220, 220, 220));
+//                button.repaint();
+//            }
+//
+//            @Override
+//            public void mouseReleased(java.awt.event.MouseEvent e) {
+//                if (button.contains(e.getPoint())) {
+//                    button.setBackground(new java.awt.Color(245, 245, 245));
+//                } else {
+//                    button.setBackground(originalBg);
+//                }
+//                button.repaint();
+//            }
+//        });
+//
+//        button.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+//            @Override
+//            public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
+//                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+//                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
+//                        java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+//
+//                // Draw rounded background
+//                g2.setColor(button.getBackground());
+//                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);
+//
+//                // Draw rounded border
+//                g2.setColor(new java.awt.Color(142, 180, 134));
+//                g2.setStroke(new java.awt.BasicStroke(2));
+//                g2.drawRoundRect(1, 1, c.getWidth() - 2, c.getHeight() - 2, 50, 50);
+//
+//                g2.dispose();
+//                super.paint(g, c);
+//            }
+//        });
+//    }
+//
+//    /**
+//     * This method is called from within the constructor to initialize the form.
+//     * WARNING: Do NOT modify this code. The content of this method is always
+//     * regenerated by the Form Editor.
+//     */
+//    @SuppressWarnings("unchecked")
+//    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+//    private void initComponents() {
+//
+//        jPanel1 = new javax.swing.JPanel();
+//        jLabel1 = new javax.swing.JLabel();
+//        label1 = new java.awt.Label();
+//        label2 = new java.awt.Label();
+//        jButton1 = new javax.swing.JButton();
+//        jButton2 = new javax.swing.JButton();
+//        jLabel2 = new javax.swing.JLabel();
+//        jLabel3 = new javax.swing.JLabel();
+//
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//        setBackground(new java.awt.Color(142, 180, 134));
+//
+//        jPanel1.setBackground(new java.awt.Color(142, 180, 134));
+//
+//        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/2.png"))); // NOI18N
+//        jLabel1.setText("jLabel1");
+//
+//        label1.setAlignment(java.awt.Label.CENTER);
+//        label1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+//        label1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+//        label1.setForeground(new java.awt.Color(255, 255, 255));
+//        label1.setName(""); // NOI18N
+//        label1.setText("SIGN UP ");
+//
+//        label2.setAlignment(java.awt.Label.CENTER);
+//        label2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+//        label2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+//        label2.setForeground(new java.awt.Color(255, 255, 255));
+//        label2.setName(""); // NOI18N
+//        label2.setText("as");
+//
+//        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+//        jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+//        jButton1.setForeground(new java.awt.Color(142, 180, 134));
+//        jButton1.setText("ADMIN");
+//        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+//        jButton1.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jButton1ActionPerformed(evt);
+//            }
+//        });
+//
+//        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+//        jButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+//        jButton2.setForeground(new java.awt.Color(142, 180, 134));
+//        jButton2.setText("STAFF");
+//        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+//        jButton2.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jButton2ActionPerformed(evt);
+//            }
+//        });
+//
+//        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+//        jLabel2.setText("Have an account? Log In");
+//
+//        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+//        jLabel3.setText("here.");
+//
+//        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+//        jPanel1.setLayout(jPanel1Layout);
+//        jPanel1Layout.setHorizontalGroup(
+//            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(jPanel1Layout.createSequentialGroup()
+//                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                    .addGroup(jPanel1Layout.createSequentialGroup()
+//                        .addGap(365, 365, 365)
+//                        .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                    .addGroup(jPanel1Layout.createSequentialGroup()
+//                        .addGap(326, 326, 326)
+//                        .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                    .addGroup(jPanel1Layout.createSequentialGroup()
+//                        .addGap(304, 304, 304)
+//                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                    .addGroup(jPanel1Layout.createSequentialGroup()
+//                        .addGap(304, 304, 304)
+//                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                    .addGroup(jPanel1Layout.createSequentialGroup()
+//                        .addGap(295, 295, 295)
+//                        .addComponent(jLabel2)
+//                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                    .addGroup(jPanel1Layout.createSequentialGroup()
+//                        .addGap(211, 211, 211)
+//                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
+//                .addContainerGap(228, Short.MAX_VALUE))
+//        );
+//        jPanel1Layout.setVerticalGroup(
+//            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(jPanel1Layout.createSequentialGroup()
+//                .addGap(43, 43, 43)
+//                .addComponent(jLabel1)
+//                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                .addGap(24, 24, 24)
+//                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                .addGap(24, 24, 24)
+//                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                .addGap(35, 35, 35)
+//                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//                    .addComponent(jLabel2)
+//                    .addComponent(jLabel3))
+//                .addContainerGap(57, Short.MAX_VALUE))
+//        );
+//
+//        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+//        getContentPane().setLayout(layout);
+//        layout.setHorizontalGroup(
+//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//        );
+//        layout.setVerticalGroup(
+//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//        );
+//
+//        pack();
+//    }// </editor-fold>//GEN-END:initComponents
+//
+//    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//        // TODO add your handling code here:
+//        new Admin().setVisible(true);
+//        this.dispose();
+//    }//GEN-LAST:event_jButton1ActionPerformed
+//
+//    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//        // TODO add your handling code here:
+//        new Staff().setVisible(true);
+//        this.dispose();
+//    }//GEN-LAST:event_jButton2ActionPerformed
+//
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Auth.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Auth.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Auth.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Auth.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Auth().setVisible(true);
+//            }
+//        });
+//    }
+//
+//    // Variables declaration - do not modify//GEN-BEGIN:variables
+//    private javax.swing.JButton jButton1;
+//    private javax.swing.JButton jButton2;
+//    private javax.swing.JLabel jLabel1;
+//    private javax.swing.JLabel jLabel2;
+//    private javax.swing.JLabel jLabel3;
+//    private javax.swing.JPanel jPanel1;
+//    private java.awt.Label label1;
+//    private java.awt.Label label2;
+//    // End of variables declaration//GEN-END:variables
+//}

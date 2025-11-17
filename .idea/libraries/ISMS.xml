@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ISMS">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ISMS/dist/ISMS.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
