@@ -2,12 +2,11 @@ package pages;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 import java.util.Objects;
-import misc.RoundedBorder;
 import misc.RoundedButton;
 
-public class Auth extends javax.swing.JFrame {
+public class Auth extends JFrame {
     public Auth() {
         setTitle("SIGN UP");
         setSize(900, 600);
@@ -90,9 +89,9 @@ public class Auth extends javax.swing.JFrame {
         linkText.setForeground(Color.decode("#AD3C3C"));
         linkText.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        linkText.addMouseListener(new java.awt.event.MouseAdapter() {
+        linkText.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            public void mouseClicked(MouseEvent evt) {
                 new Auth2().setVisible(true);
                 dispose();
             }
@@ -100,7 +99,6 @@ public class Auth extends javax.swing.JFrame {
 
         contingencyPanel.add(contingencyText);
         contingencyPanel.add(linkText);
-
 
         adminPanel.add(adminBtn);
         staffPanel.add(staffBtn);
@@ -132,8 +130,6 @@ public class Auth extends javax.swing.JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new Auth().setVisible(true);
-        });
+        SwingUtilities.invokeLater(() -> new Auth().setVisible(true));
     }
 }
