@@ -48,17 +48,16 @@ public class RoundedButton extends JButton {
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
 
         // Draw border
-        g2.setStroke(new BasicStroke(borderThickness));
-        g2.setColor(borderColor);
-        int offset = borderThickness / 2;
-        g2.drawRoundRect(offset, offset, getWidth() - borderThickness, getHeight() - borderThickness, radius, radius);
+        if (borderThickness > 0) {
+            g2.setStroke(new BasicStroke(borderThickness));
+            g2.setColor(borderColor);
+            int offset = borderThickness / 2;
+            g2.drawRoundRect(offset, offset, getWidth() - borderThickness, getHeight() - borderThickness, radius, radius);
+        }
 
         g2.dispose();
 
         // Draw the button text on top
         super.paintComponent(g);
-
-        // Optional: Ensure text is always visible
-        setForeground(Color.decode("#8EB486")); // your text color
     }
 }
