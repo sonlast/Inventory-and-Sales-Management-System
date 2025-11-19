@@ -229,8 +229,10 @@ public class Auth extends JFrame {
         SwingUtilities.invokeLater(() -> {
             Auth auth = new Auth();
             auth.setVisible(true);
-//            auth.insertPerson("John Doe", "Male");
-            auth.insertPerson("Jane Smith", "Female");
+//            auth.insertPerson("Aiah Arceta", "Female");
+//            auth.insertPerson("Mikha Lim", "Female");
+            auth.insertPerson("Nicole Torres", "Female");
+            auth.insertPerson("Maloi Ricalde", "Female");
 //            auth.updatePerson(3, "John Updated", "Male");
 //            auth.deletePerson(2);
 //            auth.SelectAll();
