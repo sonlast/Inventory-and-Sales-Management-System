@@ -4,9 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
+import java.util.List;
+import java.util.ArrayList;
 import misc.RoundedButton;
+import database.Person;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Auth extends JFrame {
+
     public Auth() {
         setTitle("SIGN UP");
         setSize(900, 600);
@@ -129,7 +139,101 @@ public class Auth extends JFrame {
         this.dispose();
     }
 
+//    public static void connect() {
+//        Connection conn = null;
+//
+//        try {
+//            // db parameters
+//            String url = "jdbc:sqlite:temp.db";
+//            conn = DriverManager.getConnection(url);
+//            System.out.println("Connection to SQLite is succesful");
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        } finally {
+//            try {
+//                if (conn != null) {
+//                    conn.close();
+//                }
+//            } catch (SQLException ex) {
+//                System.out.println(ex.getMessage());
+//            }
+//        }
+//    }
+    public void SelectAll() {
+        Person person;
+        List<Person> personList = new ArrayList<>();
+        String sql = "SELECT * FROM Person";
+
+        try (Connection conn = connect(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                System.out.println(rs.getString("Name") + '\t' + rs.getString("Sex"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void insertPerson(String name, String sex) {
+        String sql = "INSERT INTO Person(Name, Sex) VALUES(?, ?)";
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, sex);
+            pstmt.executeUpdate();
+            System.out.println("Person added successfully.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updatePerson(int id, String name, String sex) {
+        String sql = "UPDATE Person SET Name = ?, Sex = ?, WHERE person_id = ?";
+        
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setString(2, sex);
+            pstmt.setInt(3, id);
+            pstmt.executeUpdate();
+            System.out.println("Person update!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void deletePerson(int id) {
+        String sql = "DELETE FROM Person WHERE person_id = ?";
+        
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            System.out.println("Person deleted!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public Connection connect() {
+        String url = "jdbc:sqlite:Information.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return conn;
+    }
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Auth().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            Auth auth = new Auth();
+            auth.setVisible(true);
+//            auth.insertPerson("John Doe", "Male");
+            auth.insertPerson("Jane Smith", "Female");
+//            auth.updatePerson(3, "John Updated", "Male");
+//            auth.deletePerson(2);
+//            auth.SelectAll();
+        });
     }
 }

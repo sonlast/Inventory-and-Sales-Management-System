@@ -2,7 +2,6 @@ package pages;
 
 import misc.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
@@ -68,12 +67,11 @@ public class Admin extends JFrame {
         JLabel emailText = new JLabel("EMAIL");
         emailText.setFont(textFieldLabelFont);
         emailText.setForeground(Color.decode("#FFFFFF"));
-
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.NORTH;
-        gbc.insets = new Insets(80, 0, 0, 0);
+        gbc.insets = new Insets(100, 0, 0, 0);
         gbc.weightx = 1;
         gbc.weighty = 1;
         mainPanel.add(emailText, gbc);
@@ -94,7 +92,6 @@ public class Admin extends JFrame {
         JLabel pwdText = new JLabel("PASSWORD");
         pwdText.setFont(textFieldLabelFont);
         pwdText.setForeground(Color.decode("#FFFFFF"));
-
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
@@ -117,7 +114,6 @@ public class Admin extends JFrame {
         JLabel repwdText = new JLabel("RE-ENTER PASSWORD");
         repwdText.setFont(textFieldLabelFont);
         repwdText.setForeground(Color.decode("#FFFFFF"));
-
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
