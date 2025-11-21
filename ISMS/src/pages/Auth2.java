@@ -121,12 +121,12 @@ public class Auth2 extends JFrame {
     }
 
     private void adminBtn(ActionEvent evt) {
-        new Admin().setVisible(true);
+        new Admin2().setVisible(true);
         this.dispose();
     }
 
     private void staffBtn(ActionEvent evt) {
-        new Staff().setVisible(true);
+        new Staff2().setVisible(true);
         this.dispose();
     }
 

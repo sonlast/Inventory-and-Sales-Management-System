@@ -214,7 +214,7 @@ public class Auth extends JFrame {
     }
     
     public Connection connect() {
-        String url = "jdbc:sqlite:Information.db";
+        String url = "jdbc:mysql:Information.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -231,8 +231,8 @@ public class Auth extends JFrame {
             auth.setVisible(true);
 //            auth.insertPerson("Aiah Arceta", "Female");
 //            auth.insertPerson("Mikha Lim", "Female");
-            auth.insertPerson("Nicole Torres", "Female");
-            auth.insertPerson("Maloi Ricalde", "Female");
+//            auth.insertPerson("Nicole Torres", "Female");
+//            auth.insertPerson("Maloi Ricalde", "Female");
 //            auth.updatePerson(3, "John Updated", "Male");
 //            auth.deletePerson(2);
 //            auth.SelectAll();

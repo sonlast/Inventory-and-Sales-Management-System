@@ -7,9 +7,9 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
 
-public class Admin extends JFrame {
+public class Admin2 extends JFrame {
 
-    public Admin() {
+    public Admin2() {
         setTitle("Admin");
         setSize(900, 600);
         setLocationRelativeTo(null);
@@ -22,7 +22,8 @@ public class Admin extends JFrame {
         Font headerFont = new Font("Trebuchet MS", Font.BOLD, 24);
         Font textFieldLabelFont = new Font("Trebuchet MS", Font.BOLD, 17);
         Font textFieldFont = new Font("Trebuchet MS", Font.PLAIN, 12);
-        Font signUpBtnFont = new Font("Trebuchet MS", Font.PLAIN, 12);
+        Font forgotPasswordFont = new Font("Trebuchet MS", Font.PLAIN, 12);
+        Font loginBtnFont = new Font("Trebuchet MS", Font.PLAIN, 12);
         Dimension buttonWH = new Dimension(140, 35);
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -63,7 +64,7 @@ public class Admin extends JFrame {
         backAndLogoPanel.add(sideLogo);
 
         // Sign-up text centered in frame but positioned below logo level
-        JLabel headerText = new JLabel("SIGN UP (ADMIN)");
+        JLabel headerText = new JLabel("LOG IN (ADMIN)");
         headerText.setFont(headerFont);
         headerText.setForeground(Color.decode("#FFFFFF"));
 
@@ -123,32 +124,32 @@ public class Admin extends JFrame {
         gbc.weighty = 1;
         mainPanel.add(passwordPanel, gbc);
 
-        JLabel repwdText = new JLabel("RE-ENTER PASSWORD");
-        repwdText.setFont(textFieldLabelFont);
-        repwdText.setForeground(Color.decode("#FFFFFF"));
+        JLabel forgotPassword = new JLabel("Forgot Password?");
+        forgotPassword.setFont(forgotPasswordFont);
+        forgotPassword.setForeground(Color.decode("#FF0C0C"));
+        forgotPassword.setCursor(new Cursor(Cursor.HAND_CURSOR));
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.NORTH;
-        gbc.insets = new Insets(260, 0, 0, 0);
+        gbc.insets = new Insets(280, 0, 0, 0);
         gbc.weightx = 1;
         gbc.weighty = 1;
-        mainPanel.add(repwdText, gbc);
 
-        JPanel repasswordPanel = createPasswordFieldWithIcon();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.insets = new Insets(290, 0, 0, 0);
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        mainPanel.add(repasswordPanel, gbc);
+        forgotPassword.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                new ForgotPassword("admin").setVisible(true);
+                dispose();
+            }
+        });
 
-        RoundedButton signUpBtn = new RoundedButton("SIGN UP", 40);
+        mainPanel.add(forgotPassword, gbc);
+
+        RoundedButton signUpBtn = new RoundedButton("LOG IN", 40);
         signUpBtn.setForeground(Color.WHITE);
         signUpBtn.setBackground(Color.decode("#997C70"));
-        signUpBtn.setFont(signUpBtnFont);
+        signUpBtn.setFont(loginBtnFont);
         signUpBtn.setPreferredSize(buttonWH);
         signUpBtn.setMinimumSize(buttonWH);
         signUpBtn.setMaximumSize(buttonWH);
@@ -166,7 +167,7 @@ public class Admin extends JFrame {
     }
 
     private void backBtn(ActionEvent evt) {
-        new Auth().setVisible(true);
+        new Auth2().setVisible(true);
         this.dispose();
     }
 
@@ -253,6 +254,6 @@ public class Admin extends JFrame {
     }
 
     public static void main (String[] args) {
-        SwingUtilities.invokeLater(() -> new Admin().setVisible(true));
+        SwingUtilities.invokeLater(() -> new Admin2().setVisible(true));
     }
 }
